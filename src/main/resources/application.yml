@@ -1,0 +1,20 @@
+#eureka服务器的启动端口  
+server:  
+  port: 8761  
+    
+#eureka的主机名 如果不配置 会从操作系统获取  
+eureka:  
+  instance:  
+    hostname: mymaster  
+    preferIpAddress: true  #未配置hostname时 使用本机ip地址作为主机名 ipAddress是ip地址  
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}  
+    appname: eurekaserver  #应用程序的名称  
+    namespace: myeureka 对外公布地址时的命名空间也就是上下文路径 不设置默认为eureka  
+  client:  
+    registerWithEureka: false   
+    fetchRegistry: false  #是否允许客户端抓取eureka的注册信息  
+    serviceUrl:  
+      defaultZone: http://mymaster:8761/myeureka/  
+security:      
+  basic:  
+    enabled: false #不启动认证    
